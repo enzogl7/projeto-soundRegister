@@ -78,9 +78,13 @@ public class ArtistaController {
     }
 
     @GetMapping("/artistas/{id}")
-    public ResponseEntity<Artista> getArtistaById(@PathVariable Long id) {
-        Optional<Artista> artista = artistaService.findById(id);
+    public ResponseEntity<Artista> getArtistaById(@RequestParam("artistaId") Long artistaId,
+                                                  @RequestParam("nomeArtista") String nomeArtista,
+                                                  @RequestParam("genero") Genero genero,
+                                                  @RequestParam("tipoArtista") TipoArtista tipoArtista) {
+        Optional<Artista> artista = artistaService.findById(artistaId);
         if (artista.isPresent()) {
+
             return ResponseEntity.ok(artista.get());
         }
         return ResponseEntity.notFound().build();

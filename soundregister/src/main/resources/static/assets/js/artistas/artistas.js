@@ -41,10 +41,12 @@ window.onload = function() {
 };
 
 function abrirModalEdicaoArtista(button) {
-    var idArtista = button.getAttribute('data-id');
-    console.log(artistaId);
+    var artistaId = button.getAttribute('data-id');
     $('#editarArtistaModal').modal('show')
-    document.getElementById('artistaId').value = idArtista;
+    document.getElementById('artistaId').value = artistaId;
+}
+
+function salvarEdicaoArtista() {
 
 }
 
