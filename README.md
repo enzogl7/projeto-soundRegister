@@ -1,0 +1,2 @@
+<h1>Projeto SoundRegister</h1>
+<p>Esse projeto foi criado a partir de um desafio fornecido no curso "Java: persistência de dados e consultas com Spring Data JPA" da Alura. Nele é ensinado como é possível realizar a criação da ideia com sua utilização no terminal da IDE, tendo isso em mente, realizei o projeto de forma autônoma sem uso do curso e integrando o mesmo a uma aplicação WEB, sem ser utilizada pelo terminar do IDE assim como foi proposto no curso.</p>
