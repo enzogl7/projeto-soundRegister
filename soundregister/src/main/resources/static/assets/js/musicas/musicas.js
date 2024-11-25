@@ -49,26 +49,51 @@ function modalEdicaoMusica(button) {
 
  function salvarEdicaoMusica() {
      var artistaIdEdicaoMusica = document.getElementById('artistaIdEdicaoMusica').value;
-     var nomeArtista = document.getElementById('nomeArtista').value;
-     var genero = document.getElementById('genero').value;
-     var tipoArtista = document.getElementById('tipoArtista').value;
+     var tituloMusicaEdicao = document.getElementById('tituloMusicaEdicao').value;
+     var artistaEdicao = document.getElementById('artistaEdicao').value;
+     var anoLancamentoEdicao = document.getElementById('anoLancamentoEdicao').value;
 
      $.ajax({
-         url: '/artistas/editar',
+         url: '/musicas/editar',
          type: 'POST',
          data: {
-             artistaId: artistaId,
-             nomeArtista: nomeArtista,
-             genero: genero,
-             tipoArtista: tipoArtista
+             artistaIdEdicaoMusica: artistaIdEdicaoMusica,
+             tituloMusicaEdicao: tituloMusicaEdicao,
+             artistaEdicao: artistaEdicao,
+             anoLancamentoEdicao: anoLancamentoEdicao
          },
          success: function (response) {
-             alert('Artista atualizado com sucesso!');
+             alert('Música atualizada com sucesso!');
              window.location.reload();
          },
          error: function (error) {
-             console.error('Erro ao editar artista:', error);
-             alert('Não foi possível editar o artista. Tente novamente.');
+             console.error('Erro ao editar música:', error);
+             alert('Não foi possível editar as informações da música. Tente novamente.');
+         }
+     });
+ }
+
+ function modalDeletarMusica(button) {
+     var musicaIdDelete = button.getAttribute('data-id');
+     $('#deletarMusicaModal').modal('show')
+     document.getElementById('musicaIdDelete').value = musicaIdDelete;
+ }
+
+ function deletarMusica() {
+     var musicaIdDelete = document.getElementById('musicaIdDelete').value;
+     $.ajax({
+         url: '/musicas/deletar',
+         type: 'POST',
+         data: {
+             musicaIdDelete: musicaIdDelete
+         },
+         success: function (response) {
+             alert('Música excluída com sucesso!');
+             window.location.reload();
+         },
+         error: function (error) {
+             console.error('Erro ao deletar música:', error);
+             alert('Não foi possível excluir a música. Tente novamente.');
          }
      });
  }

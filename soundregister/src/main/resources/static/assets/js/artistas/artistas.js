@@ -87,12 +87,12 @@ function deletarArtista() {
             artistaId: artistaIdDelete
         },
         success: function (response) {
-            alert('Artista deletado com sucesso!');
+            alert('Artista excluído com sucesso!');
             window.location.reload();
         },
         error: function (error) {
-            console.error('Erro ao deletar artista:', error);
-            alert('Não foi possível deletar o artista. Tente novamente.');
+            console.error('Erro ao excluir artista:', error);
+            alert('Não foi possível excluir o artista. Tente novamente.');
         }
     });
 }

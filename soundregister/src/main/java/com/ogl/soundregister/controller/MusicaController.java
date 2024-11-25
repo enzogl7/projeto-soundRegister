@@ -1,6 +1,8 @@
 package com.ogl.soundregister.controller;
 
 import com.ogl.soundregister.model.artista.Artista;
+import com.ogl.soundregister.model.artista.Genero;
+import com.ogl.soundregister.model.artista.TipoArtista;
 import com.ogl.soundregister.model.musica.Musica;
 import com.ogl.soundregister.service.ArtistaService;
 import com.ogl.soundregister.service.MusicaService;
@@ -34,9 +36,9 @@ public class MusicaController {
     // requisicao para salvar as músicas da página de registro na tabela MUSICAS
     @PostMapping("/salvar_musica")
     public ModelAndView salvarMusica(
-            @RequestParam("tituloMusica")String tituloMusica,
-            @RequestParam("artista")String artistaId,
-            @RequestParam("anoLancamento")String anoLancamento) {
+            @RequestParam("tituloMusica") String tituloMusica,
+            @RequestParam("artista") String artistaId,
+            @RequestParam("anoLancamento") String anoLancamento) {
 
         Musica musica = new Musica();
         musica.setTitulo(tituloMusica);
@@ -60,4 +62,27 @@ public class MusicaController {
         return "listagem/listar_musicas";
     }
 
+    @PostMapping("/musicas/editar")
+    public ModelAndView getArtistaById(@RequestParam("artistaIdEdicaoMusica") String artistaIdEdicaoMusica,
+                                       @RequestParam("tituloMusicaEdicao") String tituloMusicaEdicao,
+                                       @RequestParam("artistaEdicao") Artista artistaEdicao,
+                                       @RequestParam("anoLancamentoEdicao") String anoLancamentoEdicao) {
+        Musica musicaEditada = musicaService.buscarPorId(Long.valueOf(artistaIdEdicaoMusica));
+        musicaEditada.setTitulo(tituloMusicaEdicao);
+        musicaEditada.setArtista(artistaEdicao);
+        musicaEditada.setAnoLancamento(Integer.valueOf(anoLancamentoEdicao));
+        musicaService.salvarMusica(musicaEditada);
+
+        ModelAndView mv = new ModelAndView("redirect:/");
+        mv.addObject("mensagem", "Música editado com sucesso!");
+        return mv;
+    }
+
+    @PostMapping("/musicas/deletar")
+    public ModelAndView deletarMusica(@RequestParam("musicaIdDelete") String musicaIdDelete) {
+        musicaService.deletarMusica(Long.valueOf(musicaIdDelete));
+        ModelAndView mv = new ModelAndView("redirect:/");
+        mv.addObject("mensagem", "Música excluída com sucesso!");
+        return mv;
+    }
 }

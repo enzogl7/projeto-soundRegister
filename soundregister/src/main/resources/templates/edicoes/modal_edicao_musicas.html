@@ -11,14 +11,14 @@
                 <form id="editarMusicaForm">
                 <input type="hidden" id="artistaIdEdicaoMusica">
                     <div class="form-group">
-                        <label for="tituloMusica">Título da música</label>
-                        <input type="text" class="form-control" id="tituloMusica" name="tituloMusica" placeholder="Digite o título da música" required>
+                        <label for="tituloMusicaEdicao">Título da música</label>
+                        <input type="text" class="form-control" id="tituloMusicaEdicao" name="tituloMusicaEdicao" placeholder="Digite o título da música" required>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="artista">Artista</label>
-                            <select class="form-control" id="artista" name="artista" required>
+                            <label for="artistaEdicao">Artista</label>
+                            <select class="form-control" id="artistaEdicao" name="artistaEdicao" required>
                                 <option value="" disabled selected>Selecione um artista</option>
                                 <option th:each="artista : ${artistas}"
                                         th:value="${artista.id}" th:text="${artista.nome}"></option>
@@ -26,14 +26,14 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="anoLancamento">Ano de lançamento</label>
-                            <input type="number" class="form-control" id="anoLancamento" name="anoLancamento" placeholder="Insira o ano de lançamento da música" required>
+                            <label for="anoLancamentoEdicao">Ano de lançamento</label>
+                            <input type="number" class="form-control" id="anoLancamentoEdicao" name="anoLancamentoEdicao" placeholder="Insira o ano de lançamento da música" required>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="salvarArtista" onclick="salvarEdicaoArtista()">Salvar</button>
+                <button type="button" class="btn btn-primary" id="salvarArtista" onclick="salvarEdicaoMusica()">Salvar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
         </div>

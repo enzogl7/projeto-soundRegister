@@ -25,5 +25,12 @@ public class MusicaService {
         return musicaRepository.findByArtista(artista);
     }
 
+    public Musica buscarPorId(Long id) {
+        return musicaRepository.findById(id).orElse(null);
+    }
+
+    public void deletarMusica(Long musicaIdDelete) {
+        musicaRepository.deleteById(musicaIdDelete);
+    }
 }
 

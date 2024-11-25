@@ -94,7 +94,7 @@ public class ArtistaController {
     public ModelAndView deletarArtista(@RequestParam("artistaId") String artistaId) {
         artistaService.deletarArtista(Long.valueOf(artistaId));
         ModelAndView mv = new ModelAndView("redirect:/");
-        mv.addObject("mensagem", "Artista deletado com sucesso!");
+        mv.addObject("mensagem", "Artista excluído com sucesso!");
         return mv;
     }
 }

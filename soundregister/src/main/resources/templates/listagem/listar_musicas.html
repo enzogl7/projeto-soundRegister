@@ -50,7 +50,7 @@
                     <td th:text="${musica.anoLancamento}"></td>
                     <td>
                         <button id="edicaoMusica" class="btn btn-warning btn-sm" th:data-id="${musica.id}" onclick="modalEdicaoMusica(this)">Editar</button>
-                        <button id="exclusaoMusica" class="btn btn-danger btn-sm" th:data-id="${musica.id}">Excluir</button>
+                        <button id="exclusaoMusica" class="btn btn-danger btn-sm" th:data-id="${musica.id}" onclick="modalDeletarMusica(this)">Excluir</button>
                     </td>
                 </tr>
             </th:block>
