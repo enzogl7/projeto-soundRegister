@@ -22,7 +22,7 @@ public class Artista {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @OneToMany(mappedBy = "artista")
+    @OneToMany(mappedBy = "artista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Musica> musicas = new ArrayList<>();
 
     public Long getId() {

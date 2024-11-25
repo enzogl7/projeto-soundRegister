@@ -6,14 +6,12 @@ import com.ogl.soundregister.model.artista.TipoArtista;
 import com.ogl.soundregister.model.musica.Musica;
 import com.ogl.soundregister.service.ArtistaService;
 import com.ogl.soundregister.service.MusicaService;
+import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -77,16 +75,26 @@ public class ArtistaController {
         return "listagem/listar_artistas";
     }
 
-    @GetMapping("/artistas/{id}")
-    public ResponseEntity<Artista> getArtistaById(@RequestParam("artistaId") Long artistaId,
+    @PostMapping("/artistas/editar")
+    public ModelAndView getArtistaById(@RequestParam("artistaId") Long artistaId,
                                                   @RequestParam("nomeArtista") String nomeArtista,
-                                                  @RequestParam("genero") Genero genero,
-                                                  @RequestParam("tipoArtista") TipoArtista tipoArtista) {
-        Optional<Artista> artista = artistaService.findById(artistaId);
-        if (artista.isPresent()) {
+                                                  @RequestParam("genero") String genero,
+                                                  @RequestParam("tipoArtista") String tipoArtista) {
+        Artista artista = artistaService.buscaPorId(artistaId);
+        artista.setNome(nomeArtista);
+        artista.setGenero(Genero.valueOf(genero));
+        artista.setTipo(TipoArtista.valueOf(tipoArtista));
+        artistaService.salvarArtista(artista);
+        ModelAndView mv = new ModelAndView("redirect:/");
+        mv.addObject("mensagem", "Artista editado com sucesso!");
+        return mv;
+    }
 
-            return ResponseEntity.ok(artista.get());
-        }
-        return ResponseEntity.notFound().build();
+    @PostMapping("/artistas/deletar")
+    public ModelAndView deletarArtista(@RequestParam("artistaId") String artistaId) {
+        artistaService.deletarArtista(Long.valueOf(artistaId));
+        ModelAndView mv = new ModelAndView("redirect:/");
+        mv.addObject("mensagem", "Artista deletado com sucesso!");
+        return mv;
     }
 }

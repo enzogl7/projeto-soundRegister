@@ -47,7 +47,53 @@ function abrirModalEdicaoArtista(button) {
 }
 
 function salvarEdicaoArtista() {
+    var artistaId = document.getElementById('artistaId').value;
+    var nomeArtista = document.getElementById('nomeArtista').value;
+    var genero = document.getElementById('genero').value;
+    var tipoArtista = document.getElementById('tipoArtista').value;
 
+    $.ajax({
+        url: '/artistas/editar',
+        type: 'POST',
+        data: {
+            artistaId: artistaId,
+            nomeArtista: nomeArtista,
+            genero: genero,
+            tipoArtista: tipoArtista
+        },
+        success: function (response) {
+            alert('Artista atualizado com sucesso!');
+            window.location.reload();
+        },
+        error: function (error) {
+            console.error('Erro ao editar artista:', error);
+            alert('Não foi possível editar o artista. Tente novamente.');
+        }
+    });
 }
 
+function modalDeletarArtista(button) {
+    var artistaIdDelete = button.getAttribute('data-id');
+    $('#deletarArtistaModal').modal('show')
+    document.getElementById('artistaIdDelete').value = artistaIdDelete;
+}
+
+function deletarArtista() {
+    var artistaIdDelete = document.getElementById('artistaIdDelete').value;
+    $.ajax({
+        url: '/artistas/deletar',
+        type: 'POST',
+        data: {
+            artistaId: artistaIdDelete
+        },
+        success: function (response) {
+            alert('Artista deletado com sucesso!');
+            window.location.reload();
+        },
+        error: function (error) {
+            console.error('Erro ao deletar artista:', error);
+            alert('Não foi possível deletar o artista. Tente novamente.');
+        }
+    });
+}
 

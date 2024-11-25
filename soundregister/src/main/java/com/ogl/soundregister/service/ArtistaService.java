@@ -2,6 +2,7 @@ package com.ogl.soundregister.service;
 
 import com.ogl.soundregister.model.artista.Artista;
 import com.ogl.soundregister.repository.ArtistaRepository;
+import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,13 @@ public class ArtistaService {
 
     public Optional<Artista> findById(Long id) {
         return artistaRepository.findById(id);
+    }
+
+    public Artista buscaPorId(Long id) {
+        return artistaRepository.findById(id).orElse(null);
+    }
+
+    public void deletarArtista(Long artistaId) {
+        artistaRepository.deleteById(artistaId);
     }
 }
