@@ -43,3 +43,14 @@ h1 {
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+

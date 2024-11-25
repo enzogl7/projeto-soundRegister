@@ -3,6 +3,7 @@ package com.ogl.soundregister.service;
 import com.ogl.soundregister.model.artista.Artista;
 import com.ogl.soundregister.repository.ArtistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +19,15 @@ public class ArtistaService {
     }
 
     public List<Artista> listarTodosArtistas() {
-        return artistaRepository.findAll();
+        return artistaRepository.findAll(Sort.by(Sort.Order.asc("nome")));
     }
 
     public Optional<Artista> buscarArtistaPorId(String id) {
         return artistaRepository.findById(Long.valueOf(id));
+    }
+
+
+    public Optional<Artista> findById(Long id) {
+        return artistaRepository.findById(id);
     }
 }

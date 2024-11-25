@@ -1,0 +1,60 @@
+<div id="editarArtistaModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Artista</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="editarArtistaForm">
+          <input type="hidden" id="artistaId">
+          <div class="form-group">
+            <label for="nomeArtista">Nome do Artista</label>
+            <input type="text" class="form-control" id="nomeArtista" name="nomeArtista" placeholder="Digite o nome do artista" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="genero">Gênero</label>
+              <select class="form-control" id="genero" name="genero" required>
+                <option value="" disabled selected>Selecione um Gênero</option>
+                <option value="ROCK">Rock</option>
+                <option value="SERTANEJO">Sertanejo</option>
+                <option value="RAP">Rap</option>
+                <option value="HIPHOP">Hip-hop</option>
+                <option value="FUNK">Funk</option>
+                <option value="SAMBA">Samba</option>
+                <option value="PAGODE">Pagode</option>
+                <option value="ELETRÔNICA">Eletrônica</option>
+                <option value="JAZZ">Jazz</option>
+                <option value="POP">Pop</option>
+                <option value="REGGAE">Reggae</option>
+              </select>
+            </div>
+
+
+            <div class="form-group col-md-6">
+              <label for="tipoArtista">Tipo de Artista</label>
+              <select class="form-control" id="tipoArtista" name="tipoArtista" required>
+                <option value="" disabled selected>Selecione um Tipo</option>
+                <option value="SOLO">Solo</option>
+                <option value="DUPLA">Dupla</option>
+                <option value="BANDA">Banda</option>
+              </select>
+            </div>
+          </div>
+
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="salvarArtista">Salvar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

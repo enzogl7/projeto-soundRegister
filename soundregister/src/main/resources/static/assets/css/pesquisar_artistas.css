@@ -18,12 +18,33 @@ h1 {
     text-align: center;
 }
 .center-box {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 500px;
-    height: 250px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.center-box h3 {
+    margin-top: 20px;
+}
+
+.resposta-box {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    color: #333;
+}
+
+.btn {
+    margin-top: 15px;
 }
 
 .btn-primary {
@@ -53,4 +74,13 @@ a{
 a:hover {
     text-decoration: none;
     color: black;
+}
+
+#nomeArtistaLabel {
+    margin-top: -120px;
+    padding-top: -25px;
+}
+.center-box .form-group label {
+    margin-top: 15px; /* Remove qualquer margem superior padrão */
+
 }

@@ -23,6 +23,7 @@ public class MusicaController {
     @Autowired
     private MusicaService musicaService;
 
+    // requisicao para a página de registro de músicas
     @GetMapping("/registrarMusicas")
     public String registrarMusicas(Model model) {
         List<Artista> artistas = artistaService.listarTodosArtistas();
@@ -30,6 +31,7 @@ public class MusicaController {
         return "registro/registro_musicas";
     }
 
+    // requisicao para salvar as músicas da página de registro na tabela MUSICAS
     @PostMapping("/salvar_musica")
     public ModelAndView salvarMusica(
             @RequestParam("tituloMusica")String tituloMusica,
@@ -48,10 +50,13 @@ public class MusicaController {
         return mv;
     }
 
+    // lista as musicas presentes na tabela MUSICAS, juntamente com o nome do artista de cada uma delas
     @GetMapping("/listarMusicas")
     public String listarMusicas(Model model) {
         List<Musica> musicas = musicaService.listarMusicas();
         model.addAttribute("musicas", musicas);
+        List<Artista> artistas = artistaService.listarTodosArtistas();
+        model.addAttribute("artistas", artistas);
         return "listagem/listar_musicas";
     }
 
