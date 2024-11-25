@@ -49,8 +49,8 @@
                     <td th:text="${musica.artista.nome}"></td>
                     <td th:text="${musica.anoLancamento}"></td>
                     <td>
-                        <a th:href="@{/musicas/editar/{id}(id=${musica.id})}" class="btn btn-primary btn-sm">Editar</a>
-                        <a th:href="@{/musicas/deletar/{id}(id=${musica.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                        <button id="edicaoMusica" class="btn btn-warning btn-sm" th:data-id="${musica.id}" onclick="modalEdicaoMusica(this)">Editar</button>
+                        <button id="exclusaoMusica" class="btn btn-danger btn-sm" th:data-id="${musica.id}">Excluir</button>
                     </td>
                 </tr>
             </th:block>
@@ -58,51 +58,12 @@
         </table>
     </div>
 </div>
+<div th:replace="/edicoes/modal_edicao_musicas"></div>
+<div th:replace="/edicoes/modal_confirmacao_deletar_musica"></div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    function filtrarTabela() {
-        var artistaFilter = document.getElementById("artistaSelect").value.toUpperCase();
-        var musicaFilter = document.getElementById("musicaInput").value.toUpperCase();
-        var rows = document.getElementById("tabelaMusicas").getElementsByTagName("tr");
-
-        if (!artistaFilter && !musicaFilter) {
-            for (var i = 0; i < rows.length; i++) {
-                rows[i].style.display = "";
-            }
-            return;
-        }
-
-        for (var i = 0; i < rows.length; i++) {
-            var columns = rows[i].getElementsByTagName("td");
-            var nomeMusica = columns[0].textContent || columns[0].innerText;
-            var artista = columns[1].textContent || columns[1].innerText;
-
-            var match = true;
-
-            if (artistaFilter && artista.toUpperCase().indexOf(artistaFilter) === -1) {
-                match = false;
-            }
-
-            if (musicaFilter && nomeMusica.toUpperCase().indexOf(musicaFilter) === -1) {
-                match = false;
-            }
-
-            if (match) {
-                rows[i].style.display = "";
-            } else {
-                rows[i].style.display = "none";
-            }
-        }
-    }
-
-    document.getElementById("artistaSelect").addEventListener("change", filtrarTabela);
-    document.getElementById("musicaInput").addEventListener("input", filtrarTabela);
-
-    window.onload = function() {
-        filtrarTabela();
-    };
-</script>
+<script src="/assets/js/musicas/musicas.js"></script>
 </body>
 </html>
