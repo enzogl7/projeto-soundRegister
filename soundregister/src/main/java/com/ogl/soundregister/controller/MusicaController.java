@@ -46,7 +46,13 @@ public class MusicaController {
 
         ModelAndView mv = new ModelAndView("redirect:/");
         return mv;
+    }
 
+    @GetMapping("/listarMusicas")
+    public String listarMusicas(Model model) {
+        List<Musica> musicas = musicaService.listarMusicas();
+        model.addAttribute("musicas", musicas);
+        return "listagem/listar_musicas";
     }
 
 }
