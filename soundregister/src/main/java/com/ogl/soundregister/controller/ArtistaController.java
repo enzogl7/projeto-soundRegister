@@ -75,6 +75,7 @@ public class ArtistaController {
         return "listagem/listar_artistas";
     }
 
+    // edita o artsita selecionado no front a partir de seu ID, depois setando as novas informações e salvando (usa ajax no artista.js)
     @PostMapping("/artistas/editar")
     public ModelAndView getArtistaById(@RequestParam("artistaId") Long artistaId,
                                                   @RequestParam("nomeArtista") String nomeArtista,
@@ -90,6 +91,7 @@ public class ArtistaController {
         return mv;
     }
 
+    // deleta o artista selecionado no front a partir do seu id (usa ajax no artista.js)
     @PostMapping("/artistas/deletar")
     public ModelAndView deletarArtista(@RequestParam("artistaId") String artistaId) {
         artistaService.deletarArtista(Long.valueOf(artistaId));

@@ -62,6 +62,7 @@ public class MusicaController {
         return "listagem/listar_musicas";
     }
 
+    // edita a música selecionada no front a partir de seu ID, depois setando as novas informações e salvando (usa ajax no musica.js)
     @PostMapping("/musicas/editar")
     public ModelAndView getArtistaById(@RequestParam("artistaIdEdicaoMusica") String artistaIdEdicaoMusica,
                                        @RequestParam("tituloMusicaEdicao") String tituloMusicaEdicao,
@@ -78,6 +79,7 @@ public class MusicaController {
         return mv;
     }
 
+    // deleta a música selecionada no front a partir do seu id (usa ajax no musica.js)
     @PostMapping("/musicas/deletar")
     public ModelAndView deletarMusica(@RequestParam("musicaIdDelete") String musicaIdDelete) {
         musicaService.deletarMusica(Long.valueOf(musicaIdDelete));
