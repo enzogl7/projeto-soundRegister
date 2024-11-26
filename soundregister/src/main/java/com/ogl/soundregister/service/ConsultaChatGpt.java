@@ -11,7 +11,6 @@ public class ConsultaChatGpt {
     public static String obterInformacao(String texto) {
 
         ChatLanguageModel gemini = GoogleAiGeminiChatModel.builder()
-                .apiKey("COLOCAR-API-KEY-GEMINI")
                 .modelName("gemini-1.5-flash")
                 .topK(40)
                 .build();
