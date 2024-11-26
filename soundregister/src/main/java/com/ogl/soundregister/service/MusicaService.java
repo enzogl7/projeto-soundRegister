@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MusicaService {
@@ -37,6 +38,16 @@ public class MusicaService {
     // deletar informações de um artista já salvo
     public void deletarMusica(Long musicaIdDelete) {
         musicaRepository.deleteById(musicaIdDelete);
+    }
+
+    // verifica se ja existe amúsica que esta sendo salva
+    public Boolean existeMusica(String titulo, Artista artista) {
+        Optional<Musica> musicaExiste = musicaRepository.findMusicaByTituloAndArtista(titulo, artista);
+        if(musicaExiste.isPresent()) {
+            return true;
+        }
+        return false;
+
     }
 }
 

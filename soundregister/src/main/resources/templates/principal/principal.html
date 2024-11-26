@@ -13,8 +13,14 @@
 <body>
 <h1><a href="/">SoundRegister</a></h1>
     <p>Registros e pesquisas de artistas e músicas.</p>
+    <div th:if="${mensagemSucesso}" class="alert alert-success">
+        <p th:text="${mensagemSucesso}"></p>
+    </div>
+    <div th:if="${mensagem}" class="alert alert-danger">
+        <p th:text="${mensagem}"></p>
+    </div>
 
-    <div class="center-box">
+<div class="center-box">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6 mb-3">

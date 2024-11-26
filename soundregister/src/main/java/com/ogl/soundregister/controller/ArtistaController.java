@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,13 +35,21 @@ public class ArtistaController {
         return "registro/registro_artistas";
     }
 
-    // salva o artistas e suas informações na tabela ARTISTA do banco de dados
+    // salva o artista e suas informações na tabela ARTISTA do banco de dados
     @PostMapping("/salvar_artista")
-    public ModelAndView salvarArtista(
+    public String salvarArtista(
             @RequestParam("nomeArtista") String nomeArtista,
             @RequestParam("genero") Genero genero,
-            @RequestParam("tipoArtista") TipoArtista tipoArtista) {
+            @RequestParam("tipoArtista") TipoArtista tipoArtista,
+            RedirectAttributes redirectAttributes) {
 
+        // verifica se o artista já existe
+        if (artistaService.existeArtista(nomeArtista)) {
+            redirectAttributes.addFlashAttribute("mensagem", "Esse artista já está registrado.");
+            return "redirect:/";
+        }
+
+        // salva o artista normalmente caso seja novo
         Artista artista = new Artista();
         artista.setNome(nomeArtista);
         artista.setGenero(genero);
@@ -48,9 +57,8 @@ public class ArtistaController {
 
         artistaService.salvarArtista(artista);
 
-        ModelAndView mv = new ModelAndView("redirect:/");
-        mv.addObject("mensagem", "Artista cadastrado com sucesso!");
-        return mv;
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Artista registrado com sucesso!");
+        return "redirect:/";
     }
 
     // requisição para listar os artistas na página /listarArtistas
@@ -77,26 +85,27 @@ public class ArtistaController {
 
     // edita o artsita selecionado no front a partir de seu ID, depois setando as novas informações e salvando (usa ajax no artista.js)
     @PostMapping("/artistas/editar")
-    public ModelAndView getArtistaById(@RequestParam("artistaId") Long artistaId,
+    public String getArtistaById(@RequestParam("artistaId") Long artistaId,
                                                   @RequestParam("nomeArtista") String nomeArtista,
                                                   @RequestParam("genero") String genero,
-                                                  @RequestParam("tipoArtista") String tipoArtista) {
+                                                  @RequestParam("tipoArtista") String tipoArtista,
+                                                    RedirectAttributes redirectAttributes) {
         Artista artista = artistaService.buscaPorId(artistaId);
         artista.setNome(nomeArtista);
         artista.setGenero(Genero.valueOf(genero));
         artista.setTipo(TipoArtista.valueOf(tipoArtista));
         artistaService.salvarArtista(artista);
-        ModelAndView mv = new ModelAndView("redirect:/");
-        mv.addObject("mensagem", "Artista editado com sucesso!");
-        return mv;
+
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Artista editado com sucesso!");
+        return "redirect:/";
     }
 
     // deleta o artista selecionado no front a partir do seu id (usa ajax no artista.js)
     @PostMapping("/artistas/deletar")
-    public ModelAndView deletarArtista(@RequestParam("artistaId") String artistaId) {
+    public String deletarArtista(@RequestParam("artistaId") String artistaId, RedirectAttributes redirectAttributes) {
         artistaService.deletarArtista(Long.valueOf(artistaId));
-        ModelAndView mv = new ModelAndView("redirect:/");
-        mv.addObject("mensagem", "Artista excluído com sucesso!");
-        return mv;
+
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Artista excluído com sucesso!");
+        return "redirect:/";
     }
 }

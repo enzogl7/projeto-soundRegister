@@ -2,7 +2,6 @@ package com.ogl.soundregister.service;
 
 import com.ogl.soundregister.model.artista.Artista;
 import com.ogl.soundregister.repository.ArtistaRepository;
-import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -40,5 +39,15 @@ public class ArtistaService {
     // deleta as informações de um artista específico
     public void deletarArtista(Long artistaId) {
         artistaRepository.deleteById(artistaId);
+    }
+
+    // verifica se ja existe o artista que esta sendo criado
+    public Boolean existeArtista(String nome) {
+        Optional<Artista> artistaExiste = artistaRepository.findArtistaByNome(nome);
+        if(artistaExiste.isPresent()) {
+            return true;
+        }
+        return false;
+
     }
 }
